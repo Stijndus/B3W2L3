@@ -22,7 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($_POST['E-mail'])){
         $emailErr = "E-mail is verplicht";
     } else {
-        $email = cleanData($_POST['E-mail']);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+        } else {
+            $email = cleanData($_POST['E-mail']);
+        }
     }
 }
 function cleanData($data){
