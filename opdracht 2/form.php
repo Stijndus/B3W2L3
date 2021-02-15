@@ -11,13 +11,29 @@ $name = $email = " ";
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>2</title>
 </head>
 <body>
 <?php
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST['Naam'];
-        $email = $_POST['E-mail'];
+    if(empty($_POST['Naam'])){
+        $nameErr = 'Naam is verplicht';
+    } else {
+        $name = cleanData($_POST['Naam']);
+    }
+    if(empty($_POST['E-mail'])){
+        $emailErr = "E-mail is verplicht";
+    } else {
+        $email = cleanData($_POST['E-mail']);
+    }
+}
+
+function cleanData($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 

@@ -16,23 +16,8 @@ $name = $email = " ";
 <body>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(empty($_POST['Naam'])){
-        $nameErr = 'Naam is verplicht';
-    } else {
-        $name = cleanData($_POST['Naam']);
-    }
-    if(empty($_POST['E-mail'])){
-        $emailErr = "E-mail is verplicht";
-    } else {
-        $email = cleanData($_POST['E-mail']);
-    }
-}
-
-function cleanData($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+    $name = $_POST['Naam'];
+    $email = $_POST['E-mail'];
 }
 
 ?>
@@ -40,10 +25,8 @@ function cleanData($data){
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
         <label for="Naam">Naam:</label><br>
         <input type="text"  id="Naam" name="Naam" value="">
-        <span class="error">* <?php echo $nameErr;?></span> <br>
         <label for="E-mail">E-mail:</label><br>
         <input type="text"  id="E-mail" name="E-mail" value="">
-        <span class="error">* <?php echo $nameErr;?></span> <br>
         <input class="button" type="submit" value="Submit">
         <p><?php echo $name;?> </p>
         <p><?php echo $email;?> </p>
